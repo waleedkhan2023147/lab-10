@@ -1,0 +1,32 @@
+"""
+Python program to create an iterator that iterates through a list and returns only the unique elements.
+Tested with a list containing duplicates.
+"""
+
+class UniqueIterator:
+    def __init__(self, input_list):
+        self.input_list = input_list
+        self.index = 0
+        self.unique_elements = set()
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        while self.index < len(self.input_list):
+            current_element = self.input_list[self.index]
+            self.index += 1
+            if current_element not in self.unique_elements:
+                self.unique_elements.add(current_element)
+                return current_element
+        raise StopIteration("End of list reached")
+
+# Example:
+if __name__ == "__main__":
+    # Test the UniqueIterator with a list containing duplicates
+    my_list = [1, 2, 2, 3, 4, 4, 5, 5, 6]
+    unique_iterator = UniqueIterator(my_list)
+
+    print("Unique elements in the list:")
+    for element in unique_iterator:
+        print(element)
